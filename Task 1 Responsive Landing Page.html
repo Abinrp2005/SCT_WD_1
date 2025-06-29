@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TechWave</title>
+</head>
+<body>
+  <script>
+    document.body.style.margin = '0';
+    document.body.style.fontFamily = 'Segoe UI, sans-serif';
+    document.body.style.backgroundColor = '#121212';
+    document.body.style.color = '#f0f0f0';
+
+    const nav = document.createElement('nav');
+    nav.style.position = 'fixed';
+    nav.style.top = '0';
+    nav.style.width = '100%';
+    nav.style.backgroundColor = '#1e1e1e';
+    nav.style.color = '#fff';
+    nav.style.display = 'flex';
+    nav.style.justifyContent = 'space-between';
+    nav.style.alignItems = 'center';
+    nav.style.padding = '15px 40px';
+    nav.style.zIndex = '1000';
+
+    const logo = document.createElement('div');
+    logo.textContent = 'TechWave';
+    logo.style.fontWeight = 'bold';
+    logo.style.fontSize = '20px';
+
+    const menu = document.createElement('div');
+    const links = ['Home', 'About', 'Services', 'Contact'];
+    links.forEach(name => {
+      const link = document.createElement('span');
+      link.textContent = name;
+      link.style.margin = '0 15px';
+      link.style.cursor = 'pointer';
+      link.style.fontSize = '16px';
+      link.style.color = '#fff';
+      link.onmouseenter = () => link.style.color = '#00bcd4';
+      link.onmouseleave = () => link.style.color = '#fff';
+      link.onmousedown = e => e.preventDefault();
+      link.onclick = () => document.getElementById(name.toLowerCase()).scrollIntoView({ behavior: 'smooth' });
+      menu.appendChild(link);
+    });
+
+    const darkToggle = document.createElement('button');
+    darkToggle.textContent = 'Toggle Theme';
+    darkToggle.style.marginLeft = '20px';
+    darkToggle.style.padding = '6px 12px';
+    darkToggle.style.background = '#00bcd4';
+    darkToggle.style.color = '#fff';
+    darkToggle.style.border = 'none';
+    darkToggle.style.borderRadius = '4px';
+    darkToggle.style.cursor = 'pointer';
+    darkToggle.onclick = () => {
+      const dark = document.body.style.backgroundColor === 'rgb(18, 18, 18)';
+      if (dark) {
+        document.body.style.backgroundColor = '#ffffff';
+        document.body.style.color = '#000000';
+        nav.style.backgroundColor = '#f1f1f1';
+        menu.querySelectorAll('span').forEach(link => link.style.color = '#000');
+      } else {
+        document.body.style.backgroundColor = '#121212';
+        document.body.style.color = '#f0f0f0';
+        nav.style.backgroundColor = '#1e1e1e';
+        menu.querySelectorAll('span').forEach(link => link.style.color = '#fff');
+      }
+    };
+
+    nav.appendChild(logo);
+    nav.appendChild(menu);
+    nav.appendChild(darkToggle);
+    document.body.appendChild(nav);
+
+    function createSection(id, title, content) {
+      const section = document.createElement('section');
+      section.id = id;
+      section.style.padding = '100px 20px';
+      section.style.minHeight = '100vh';
+      section.style.display = 'flex';
+      section.style.flexDirection = 'column';
+      section.style.alignItems = 'center';
+      section.style.textAlign = 'center';
+
+      const h2 = document.createElement('h2');
+      h2.textContent = title;
+      h2.style.marginBottom = '20px';
+      h2.style.fontSize = '32px';
+
+      const p = document.createElement('p');
+      p.textContent = content;
+      p.style.maxWidth = '700px';
+      p.style.lineHeight = '1.8';
+      p.style.fontSize = '18px';
+
+      section.appendChild(h2);
+      section.appendChild(p);
+      document.body.appendChild(section);
+    }
+
+    const hero = document.createElement('section');
+    hero.id = 'home';
+    hero.style.minHeight = '100vh';
+    hero.style.display = 'flex';
+    hero.style.flexDirection = 'column';
+    hero.style.justifyContent = 'center';
+    hero.style.alignItems = 'center';
+    hero.style.textAlign = 'center';
+    hero.style.padding = '100px 20px';
+
+    const heroTitle = document.createElement('h1');
+    heroTitle.textContent = 'Welcome to TechWave';
+    heroTitle.style.fontSize = '40px';
+    heroTitle.style.marginBottom = '20px';
+
+    const heroSub = document.createElement('p');
+    heroSub.textContent = 'Building innovative web solutions for modern businesses.';
+    heroSub.style.fontSize = '20px';
+    heroSub.style.maxWidth = '600px';
+
+    const cta = document.createElement('button');
+    cta.textContent = 'Get Started';
+    cta.style.marginTop = '30px';
+    cta.style.padding = '12px 30px';
+    cta.style.fontSize = '16px';
+    cta.style.border = 'none';
+    cta.style.backgroundColor = '#00bcd4';
+    cta.style.color = '#fff';
+    cta.style.borderRadius = '5px';
+    cta.style.cursor = 'pointer';
+    cta.onclick = () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+
+    hero.appendChild(heroTitle);
+    hero.appendChild(heroSub);
+    hero.appendChild(cta);
+    document.body.appendChild(hero);
+
+    createSection('about', 'About Us', 'TechWave creates beautiful, fast, and responsive web applications for startups and businesses.');
+    createSection('services', 'Our Services', 'Website Development, Responsive Design, Web Apps, SEO Optimization.');
+
+    const contact = document.createElement('section');
+    contact.id = 'contact';
+    contact.style.padding = '100px 20px';
+    contact.style.textAlign = 'center';
+
+    const contactTitle = document.createElement('h2');
+    contactTitle.textContent = 'Get in Touch';
+    contactTitle.style.marginBottom = '20px';
+
+    const contactForm = document.createElement('div');
+    contactForm.style.display = 'flex';
+    contactForm.style.flexDirection = 'column';
+    contactForm.style.alignItems = 'center';
+    contactForm.style.maxWidth = '500px';
+    contactForm.style.margin = '0 auto';
+
+    ['Your Name', 'Email Address', 'Message'].forEach(ph => {
+      const input = document.createElement(ph === 'Message' ? 'textarea' : 'input');
+      input.placeholder = ph;
+      input.style.marginBottom = '15px';
+      input.style.width = '100%';
+      input.style.padding = '12px';
+      input.style.fontSize = '16px';
+      input.style.border = '1px solid #444';
+      input.style.borderRadius = '4px';
+      input.style.backgroundColor = '#1e1e1e';
+      input.style.color = '#f0f0f0';
+      if (ph === 'Message') input.rows = 5;
+      contactForm.appendChild(input);
+    });
+
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = 'Send Message';
+    submitBtn.style.padding = '12px 25px';
+    submitBtn.style.backgroundColor = '#00bcd4';
+    submitBtn.style.color = '#fff';
+    submitBtn.style.border = 'none';
+    submitBtn.style.borderRadius = '5px';
+    submitBtn.style.cursor = 'pointer';
+
+    contactForm.appendChild(submitBtn);
+    contact.appendChild(contactTitle);
+    contact.appendChild(contactForm);
+    document.body.appendChild(contact);
+
+    window.addEventListener('scroll', () => {
+      nav.style.backgroundColor = window.scrollY > 50 ? '#000' : '#1e1e1e';
+    });
+  </script>
+</body>
+</html>
